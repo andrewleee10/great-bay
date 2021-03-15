@@ -1,5 +1,6 @@
 const { createConnection } = require('mysql2')
 const { prompt } = require('inquirer')
+require('console.table')
 
 const db = createConnection('mysql://root:rootroot@localhost/great_bay_db')
 
@@ -30,7 +31,7 @@ const bid = () => {
           })
         } else {
           console.log('You need to place a higher bid.')
-          mainMenu()
+          bid()
         }
       })
       .catch(err => console.log(err))
@@ -65,22 +66,37 @@ const post = () => {
     .catch(err => console.log(err))
 }
 
+const view = () => {
+  db.query('SELECT * FROM items', (err, items) => {
+    if (err) {console.log(err) }
+    console.table(items)
+    mainMenu()
+  })
+}
+
 const mainMenu = () => {
   prompt([
     {
       type: 'list',
       name: 'choice',
       message: 'What would you like to do?',
-      choices: ['POST AN ITEM', 'BID ON AN ITEM', 'EXIT']
+      choices: ['POST AN ITEM', 'BID ON AN ITEM', 'VIEW ITEMS', 'EXIT']
     }
   ])
     .then( ({choice}) => {
-      if(choice === 'POST AN ITEM') {
-        post()
-      } else if  (choice === 'BID ON AN ITEM') {
-        bid()
-      } else {
-        process.exit()
+      switch(choice) {
+        case 'POST AN ITEM':
+          post()
+          break
+        case 'BID ON AN ITEM':
+          bid()
+          break
+        case 'VIEW ITEMS':
+          view()
+          break
+        case 'EXIT':
+          process.exit()
+          break
       }
     })
     .catch(err => console.log(err))
