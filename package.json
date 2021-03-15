@@ -1,0 +1,24 @@
+{
+  "name": "great-bay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewleee10/great-bay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewleee10/great-bay/issues"
+  },
+  "homepage": "https://github.com/andrewleee10/great-bay#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "mysql2": "^2.2.5"
+  }
+}
